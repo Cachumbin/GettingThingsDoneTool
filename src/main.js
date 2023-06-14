@@ -9,6 +9,25 @@ const categoria = document.getElementById("categoria");
 let tareas = [];
 let categorias = ["Sin Categoria"]
 let indexTareas = 0;
+let accion;
+
+function createTask(tarea) {
+
+    if (tarea.accionable) {
+        accion = "Si";
+    }
+    else {
+        accion = "No";
+    }
+
+    container.innerHTML = `
+        <div>
+            <p>${tarea.nombre}</p>
+            <p>${tarea.area}</p>
+            <p>${accion}</p>
+        </div>
+    `
+}
 
 mandar2.addEventListener("click", ()=>{
     console.log(categoria.value);
@@ -25,9 +44,11 @@ mandar.addEventListener("click", ()=>{
 
     tareas[indexTareas] = new Task(nombreTarea.value, tipoTarea.value, accionableTarea.checked)
     console.log(tareas[indexTareas])
+    createTask(tareas[indexTareas])
     indexTareas++
 
     nombreTarea.value = ""
     tipoTarea.value = ""
     accionableTarea.checked = false;
 })
+
