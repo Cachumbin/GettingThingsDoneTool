@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getting Things Done Tool</title>
+    <link rel="stylesheet" href="./Styles/hide.css">
 </head>
 <body>
     <header class="header">
@@ -28,7 +29,7 @@
                 </label>
                 <label for="tipoTarea"> Introduce la categoria de la tarea
                     <select name="tipoTarea" id="tipoTarea">
-                        <option value="sinCategoria">Sin Categoria</option>
+                        <option value="Sin Categoria">Sin Categoria</option>
                     </select>
                 </label>
                 <label for="accionableTarea"> Es accionable
@@ -38,7 +39,19 @@
             </form>
         </section>
         <section class="container" id="container">
+            <fieldset id="filtro" class="filtro">
+                <legend>Filtrar por Categoria</legend>
+                <div>
+                    <input type="radio" id="todas" name="categoriaOpcion" value="Todas" checked>
+                    <label for="todas">Todas</label>
+                </div>
 
+                <div>
+                    <input type="radio" id="sinCategoria" name="categoriaOpcion" value="Sin Categoria">
+                    <label for="sinCategoria">Sin Categoria</label>
+                </div>
+            </fieldset>
+            <input type="button" id="filtrar" class="filtrar" value="Filtrar">
         </section>
     </main>
     <script src="./Classes/task.js"></script>
