@@ -9,16 +9,13 @@ const filtro = document.getElementById("filtro");
 const filtrar = document.getElementById("filtrar");
 
 let tareas = [];
-let categorias = ["Sin Categoria"];
-let indexTareas = 0;
 let accion;
 let categoriasFiltro = [];
 categoriasFiltro[0] = document.getElementById("todas");
 categoriasFiltro[1] = document.getElementById("sinCategoria");
-let indexFiltro = 2;
 let divs = [];
 
-function createTask(tarea, index) {
+function createTask(tarea) {
 
     if (tarea.accionable) {
         accion = "Si";
@@ -39,7 +36,7 @@ function createTask(tarea, index) {
     `
     newDiv.classList.add(`tareaDiv`)
     newDiv.id = `${tarea.nombre}`
-    divs[index] = newDiv
+    divs.push(newDiv)
 }
 
 function display(radioActivo) {
@@ -66,7 +63,6 @@ mandar2.addEventListener("click", ()=>{
     } else {
 
         console.log(categoria.value);
-        categorias.push(categoria.value)
         tipoTarea.insertAdjacentHTML("beforeend",`<option value="${categoria.value}"> ${categoria.value} </option>`);
         filtro.insertAdjacentHTML("beforeend",`
             <div>
@@ -75,9 +71,8 @@ mandar2.addEventListener("click", ()=>{
             </div>
         `);
 
-        categoriasFiltro[indexFiltro] = document.getElementById(`${categoria.value}`);
+        categoriasFiltro.push(document.getElementById(`${categoria.value}`))
 
-        indexFiltro++
 
         categoria.value = ""
         console.log(categorias)
@@ -97,10 +92,8 @@ mandar.addEventListener("click", ()=>{
         console.log(tipoTarea.value);
         console.log(accionableTarea.checked);
 
-        tareas[indexTareas] = new Task(nombreTarea.value, tipoTarea.value, accionableTarea.checked)
-        console.log(tareas[indexTareas])
-        createTask(tareas[indexTareas],indexTareas)
-        indexTareas++
+        tareas.push(new Task(nombreTarea.value, tipoTarea.value, accionableTarea.checked))
+        createTask(tareas[tareas.length-1])
 
         nombreTarea.value = ""
         tipoTarea.value = ""
