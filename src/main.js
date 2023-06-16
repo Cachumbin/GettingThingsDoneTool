@@ -33,10 +33,11 @@ function createTask(tarea) {
         <p>${tarea.nombre}</p>
         <p>${tarea.area}</p>
         <p>${accion}</p>
+        <input type="button" class="boton" value="Completada" id="${tarea.nombre}">
     `
     newDiv.classList.add(`tareaDiv`)
     newDiv.id = `${tarea.nombre}`
-    divs.push(newDiv)
+    divs.push(new TaskId(tarea.nombre, newDiv))
 }
 
 function display(radioActivo) {
@@ -75,7 +76,6 @@ mandar2.addEventListener("click", ()=>{
 
 
         categoria.value = ""
-        console.log(categorias)
         console.log(categoriasFiltro)
 
         
@@ -113,6 +113,18 @@ filtrar.onclick = function() {
     display(selected.value)
 }
 
-function deleteTask() {
-
+function deleteTask(tarea) {
+    var tareaBorrar = tareas.find((tarea_borrar) => tarea.nombre === tareas.nombre)
+    var divBorrar = divs.find((div)=> divs.nombre === tarea.nombre )
+    console.log(divBorrar.id);
+    divBorrar.id.remove()
+    tareas = tareas.filter(tareaDeBorrar => tareaDeBorrar != tareaBorrar)
+    console.log(tareas)
 }
+
+container.addEventListener("click", function(event){
+    if (event.target.classList.contains(`boton`)) {
+        deleteTask(event.target.id)
+    }
+    event.stopPropagation()
+})

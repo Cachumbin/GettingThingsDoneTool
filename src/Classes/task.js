@@ -3,3 +3,8 @@ function Task(nombre, area, accionable) {
     this.area = area;
     this.accionable = accionable;
 }
+
+function TaskId(nombre, id) {
+    this.nombre = nombre;
+    this.id = id;
+}
