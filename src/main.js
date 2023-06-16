@@ -41,18 +41,11 @@ function createTask(tarea) {
 }
 
 function display(radioActivo) {
-    if (radioActivo === 'Todas') {
-        for (let i = 0; i < tareas.length; i++) {
-            divs[i].id.classList.remove('hide')
-        }
-    } else {
-        for (let i = 0; i < tareas.length; i++) {
-            if (tareas[i].area === radioActivo) {
-                divs[i].id.classList.remove('hide')
-                
-            } else {
-                divs[i].id.classList.add('hide')
-            }
+    for (let i = 0; i < tareas.length; i++) {
+        if (radioActivo === 'Todas' || tareas[i].area === radioActivo) {
+            divs[i].id.classList.remove('hide');
+        } else {
+            divs[i].id.classList.add('hide');
         }
     }
 }
@@ -109,22 +102,22 @@ mandar.addEventListener("click", ()=>{
 })
 
 filtrar.onclick = function() {
-    var radios = document.getElementsByName("categoriaOpcion");
-    var selected = Array.from(radios).find((radio) => radio.checked);
-    display(selected.value)
+    var selected = categoriasFiltro.find(radio => radio.checked);
+    if (selected) {
+        display(selected.value);
+    }
 }
 
 function deleteTask(tarea) {
-    var tareaBorrar = tareas.find((tarea_borrar) => tarea.nombre === tareas.nombre)
-    var divBorrar = divs.find((div)=> divs.nombre === tarea.nombre )
-    console.log(divBorrar.id);
-    divBorrar.id.remove()
-    if (tareas[1]) {
-        tareas = tareas.filter(tareaDeBorrar => tareaDeBorrar != tareaBorrar)
-    } else {
-        tareas = [];
+    var tareaIndex = tareas.findIndex(t => t.nombre === tarea);
+    if (tareaIndex !== -1) {
+        tareas.splice(tareaIndex, 1);
+        var divIndex = divs.findIndex(d => d.nombre === tarea);
+        if (divIndex !== -1) {
+            divs[divIndex].id.remove();
+            divs.splice(divIndex, 1);
+        }
     }
-    console.log(tareas)
 }
 
 container.addEventListener("click", function(event){
