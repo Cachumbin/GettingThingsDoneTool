@@ -9,7 +9,7 @@ const filtro = document.getElementById("filtro");
 const filtrar = document.getElementById("filtrar");
 
 let tareas = [];
-let categorias = ["Sin Categoria"]
+let categorias = ["Sin Categoria"];
 let indexTareas = 0;
 let accion;
 let categoriasFiltro = [];
@@ -116,6 +116,10 @@ mandar.addEventListener("click", ()=>{
 
 filtrar.onclick = function() {
     var radios = document.getElementsByName("categoriaOpcion");
-    var selected = Array.from(radios).find(radio => radio.checked);
+    var selected = Array.from(radios).find((radio) => radio.checked);
     display(selected.value)
+}
+
+function deleteTask() {
+
 }
