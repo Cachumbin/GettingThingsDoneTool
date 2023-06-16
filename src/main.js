@@ -43,14 +43,15 @@ function createTask(tarea) {
 function display(radioActivo) {
     if (radioActivo === 'Todas') {
         for (let i = 0; i < tareas.length; i++) {
-            divs[i].classList.remove('hide')
+            divs[i].id.classList.remove('hide')
         }
     } else {
         for (let i = 0; i < tareas.length; i++) {
             if (tareas[i].area === radioActivo) {
-                divs[i].classList.remove('hide')
+                divs[i].id.classList.remove('hide')
+                
             } else {
-                divs[i].classList.add('hide')
+                divs[i].id.classList.add('hide')
             }
         }
     }
@@ -118,7 +119,11 @@ function deleteTask(tarea) {
     var divBorrar = divs.find((div)=> divs.nombre === tarea.nombre )
     console.log(divBorrar.id);
     divBorrar.id.remove()
-    tareas = tareas.filter(tareaDeBorrar => tareaDeBorrar != tareaBorrar)
+    if (tareas[1]) {
+        tareas = tareas.filter(tareaDeBorrar => tareaDeBorrar != tareaBorrar)
+    } else {
+        tareas = [];
+    }
     console.log(tareas)
 }
 
