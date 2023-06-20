@@ -17,23 +17,23 @@
     </header>
     <main class="main" id="main">
         <section class="crearTarea">
-            <form action="" id="form2">
-                <label for="categoria"> Introcude el nombre de la categoria
+            <form action="" id="form2" class="form2">
+                <label for="categoria" id="form2label"> Introcude el nombre de la categoria
                     <input type="text" id="categoria">
                 </label>
-                <input type="button" id="submit2" class="submit2" value="Send">
+                <input type="button" id="submit2" class="submit" value="Send">
             </form>
             <form action="" class="form">
-                <label for="nombreTarea"> Introduce el nombre de la tarea
-                    <input type="text" id="nombreTarea">
+                <label for="nombreTarea" > Introduce el nombre de la tarea
+                    <input type="text" id="nombreTarea" class="label">
                 </label>
                 <label for="tipoTarea"> Introduce la categoria de la tarea
-                    <select name="tipoTarea" id="tipoTarea">
+                    <select name="tipoTarea" id="tipoTarea" class="label">
                         <option value="Sin Categoria">Sin Categoria</option>
                     </select>
                 </label>
                 <label for="accionableTarea"> Es accionable
-                    <input type="checkbox" id="accionableTarea"> 
+                    <div class="checkboxDiv"><input type="checkbox" id="accionableTarea" class="label caja"><span class="toggle"></span></div> 
                 </label>
                 <input type="button" id="submit" class="submit" value="Send">
             </form>
