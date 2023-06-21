@@ -43,16 +43,17 @@
                 <legend>Filtrar por Categoria</legend>
                 <div>
                     <input type="radio" id="todas" name="categoriaOpcion" value="Todas" checked>
-                    <label for="todas">Todas</label>
+                    <label for="todas" class="filtroLabel">Todas</label>
                 </div>
 
                 <div>
                     <input type="radio" id="sinCategoria" name="categoriaOpcion" value="Sin Categoria">
-                    <label for="sinCategoria">Sin Categoria</label>
+                    <label for="sinCategoria" class="filtroLabel">Sin Categoria</label>
                 </div>
             </fieldset>
             <input type="button" id="filtrar" class="filtrar" value="Filtrar">
         </section>
+        <section id="tasks"><p id="noTarea">No hay tareas aun</p></section>
     </main>
     <script src="./Classes/task.js"></script>
     <script src="main.js"></script>

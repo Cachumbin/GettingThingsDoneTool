@@ -7,6 +7,8 @@ const mandar2 = document.getElementById("submit2");
 const categoria = document.getElementById("categoria");
 const filtro = document.getElementById("filtro");
 const filtrar = document.getElementById("filtrar");
+const tasksContainer = document.getElementById("tasks");
+const noTarea = document.getElementById("noTarea");
 
 let tareas = [];
 let accion;
@@ -16,6 +18,10 @@ categoriasFiltro[1] = document.getElementById("sinCategoria");
 let divs = [];
 
 function createTask(tarea) {
+
+    if (noTarea) {
+        noTarea.remove();
+    }
 
     if (tarea.accionable) {
         accion = "Si";
@@ -27,12 +33,12 @@ function createTask(tarea) {
     var newDiv = document.createElement("div");
     var currentDiv = document.getElementById("div1");
     document.body.insertBefore(newDiv, currentDiv);
-    container.append(newDiv);
+    tasksContainer.append(newDiv);
 
     newDiv.innerHTML = `
         <p>${tarea.nombre}</p>
-        <p>${tarea.area}</p>
-        <p>${accion}</p>
+        <p>Categoria: ${tarea.area}</p>
+        <p>Es accionable: ${accion}</p>
         <input type="button" class="boton" value="Completada" id="${tarea.nombre}">
     `
     newDiv.classList.add(`tareaDiv`)
@@ -62,7 +68,7 @@ mandar2.addEventListener("click", ()=>{
         filtro.insertAdjacentHTML("beforeend",`
             <div>
                 <input type="radio" id="${categoria.value}" name="categoriaOpcion" value="${categoria.value}" checked>
-                <label for="${categoria.value}">${categoria.value}</label>
+                <label for="${categoria.value}" class="filtroLabel">${categoria.value}</label>
             </div>
         `);
 
@@ -120,7 +126,7 @@ function deleteTask(tarea) {
     }
 }
 
-container.addEventListener("click", function(event){
+tasksContainer.addEventListener("click", function(event){
     if (event.target.classList.contains(`boton`)) {
         deleteTask(event.target.id)
     }
