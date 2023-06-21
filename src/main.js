@@ -17,6 +17,10 @@ categoriasFiltro[0] = document.getElementById("todas");
 categoriasFiltro[1] = document.getElementById("sinCategoria");
 let divs = [];
 
+let prueba = 3;
+
+localStorage.setItem("Prueba", JSON.stringify(prueba))
+
 function createTask(tarea) {
 
     if (noTarea) {
@@ -104,7 +108,7 @@ mandar.addEventListener("click", ()=>{
         alert("Llene todos los campos antes de enviar")
 
     }
-    
+    localStorage.setItem("tareas", JSON.stringify(tareas))
 })
 
 filtrar.onclick = function() {
@@ -122,6 +126,8 @@ function deleteTask(tarea) {
         if (divIndex !== -1) {
             divs[divIndex].id.remove();
             divs.splice(divIndex, 1);
+            localStorage.removeItem("tareas")
+            localStorage.setItem("tareas", JSON.stringify(tareas))
         }
     }
 }
@@ -132,3 +138,14 @@ tasksContainer.addEventListener("click", function(event){
     }
     event.stopPropagation()
 })
+
+window.addEventListener("load", ()=>{
+    let storedTareas = localStorage.getItem("tareas")
+    tareas = JSON.parse(storedTareas)
+
+    tareas.forEach((tarea)=>{
+        createTask(tarea)
+    })
+})
+
+console.log(tareas)
