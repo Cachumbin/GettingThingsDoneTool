@@ -131,7 +131,7 @@ function deleteTask(tarea) {
         tareas.splice(tareaIndex, 1);
         var divIndex = divs.findIndex(d => d.nombre === tarea);
         if (divIndex !== -1) {
-            divs[divIndex].id.remove();
+            divs[divIndex].elemento.remove();
             divs.splice(divIndex, 1);
             localStorage.removeItem("tareas")
             localStorage.setItem("tareas", JSON.stringify(tareas))
