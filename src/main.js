@@ -10,16 +10,13 @@ const filtrar = document.getElementById("filtrar");
 const tasksContainer = document.getElementById("tasks");
 const noTarea = document.getElementById("noTarea");
 
+
 let tareas = [];
 let accion;
 let categoriasFiltro = [];
-categoriasFiltro[0] = document.getElementById("todas");
-categoriasFiltro[1] = document.getElementById("sinCategoria");
+categoriasFiltro[0] = new Categoria("Todas")
+categoriasFiltro[1] = new Categoria("Sin Categoria")
 let divs = [];
-
-let prueba = 3;
-
-localStorage.setItem("Prueba", JSON.stringify(prueba))
 
 function createTask(tarea) {
 
@@ -50,42 +47,47 @@ function createTask(tarea) {
     divs.push(new TaskId(tarea.nombre, newDiv))
 }
 
-function display(radioActivo) {
-    for (let i = 0; i < tareas.length; i++) {
-        if (radioActivo === 'Todas' || tareas[i].area === radioActivo) {
-            divs[i].id.classList.remove('hide');
-        } else {
-            divs[i].id.classList.add('hide');
-        }
+function display(target) {
+    for (let i = 0; i < divs.length; i++) {
+      if (target === 'Todas' || tareas[i].area === target) {
+        divs[i].elemento.classList.remove('hide');
+        console.log("mostrado")
+      } else {
+        divs[i].elemento.classList.add('hide');
+        console.log("escondido")
+      }
     }
-}
-
+  }
+  
 mandar2.addEventListener("click", ()=>{
     if (categoria.value == "") {
 
         alert("Llene todos los campos antes de enviar")
         
     } else {
-
+        categoriasFiltro.push(new Categoria(categoria.value))
         console.log(categoria.value);
-        tipoTarea.insertAdjacentHTML("beforeend",`<option value="${categoria.value}"> ${categoria.value} </option>`);
+        tipoTarea.insertAdjacentHTML("beforeend",`<option value="${categoria.value}" id="${categoria.value}"> ${categoria.value} </option>`);
         filtro.insertAdjacentHTML("beforeend",`
-            <div>
-                <input type="radio" id="${categoria.value}" name="categoriaOpcion" value="${categoria.value}" checked>
-                <label for="${categoria.value}" class="filtroLabel">${categoria.value}</label>
-            </div>
+            <input type="button" id="${categoria.value}" class="botonFiltro" value="${categoria.value}">
         `);
 
-        categoriasFiltro.push(document.getElementById(`${categoria.value}`))
 
 
         categoria.value = ""
         console.log(categoriasFiltro)
 
+        localStorage.setItem("categorias", JSON.stringify(categoriasFiltro));
+
         
 
     }
 })
+
+function buscar(category) {
+    let result = categoriasFiltro.find(element => element.nombre === category)
+    return result
+} 
 
 mandar.addEventListener("click", ()=>{
     
@@ -96,7 +98,11 @@ mandar.addEventListener("click", ()=>{
         console.log(tipoTarea.value);
         console.log(accionableTarea.checked);
 
-        tareas.push(new Task(nombreTarea.value, tipoTarea.value, accionableTarea.checked))
+        let string = tipoTarea.value
+
+        let cat = buscar(string)
+
+        tareas.push(new Task(nombreTarea.value, tipoTarea.value, accionableTarea.checked, cat))
         createTask(tareas[tareas.length-1])
 
         nombreTarea.value = ""
@@ -111,12 +117,13 @@ mandar.addEventListener("click", ()=>{
     localStorage.setItem("tareas", JSON.stringify(tareas))
 })
 
-filtrar.onclick = function() {
-    var selected = categoriasFiltro.find(radio => radio.checked);
-    if (selected) {
-        display(selected.value);
+  filtro.addEventListener("click", function(event) {
+    if (event.target.classList.contains(`botonFiltro`)) {
+        console.log(event.target.value)
+        display(event.target.value)
     }
-}
+    event.stopPropagation()
+  })
 
 function deleteTask(tarea) {
     var tareaIndex = tareas.findIndex(t => t.nombre === tarea);
@@ -128,6 +135,9 @@ function deleteTask(tarea) {
             divs.splice(divIndex, 1);
             localStorage.removeItem("tareas")
             localStorage.setItem("tareas", JSON.stringify(tareas))
+            if (tareas == null) {
+                tareas = []
+            }
         }
     }
 }
@@ -143,9 +153,38 @@ window.addEventListener("load", ()=>{
     let storedTareas = localStorage.getItem("tareas")
     tareas = JSON.parse(storedTareas)
 
+    if (tareas == null) {
+        tareas = []
+    }
+
     tareas.forEach((tarea)=>{
         createTask(tarea)
     })
+
+    let storedCategorias = localStorage.getItem("categorias");
+    categoriasFiltro = JSON.parse(storedCategorias);
+
+    if (categoriasFiltro == null) {
+        categoriasFiltro = []
+        categoriasFiltro[0] = new Categoria("Todas")
+        categoriasFiltro[1] = new Categoria("Sin Categoria")
+    }
+
+    if (categoriasFiltro.length > 2) {
+        for (let i = 0; i < categoriasFiltro.length; i++) {
+            if (i+2 != undefined) {
+                tipoTarea.insertAdjacentHTML("beforeend",`<option value="${categoriasFiltro[i+2].nombre}" id="${categoriasFiltro[i+2].nombre}"> ${categoriasFiltro[i+2].nombre} </option>`);
+                filtro.insertAdjacentHTML("beforeend",`
+                <input type="button" id="${categoriasFiltro[i+2].nombre}" class="botonFiltro" value="${categoriasFiltro[i+2].nombre}">
+                `);
+            } else {
+                console.log("terminado")
+            }
+        }
+    }
+
 })
 
+
 console.log(tareas)
+

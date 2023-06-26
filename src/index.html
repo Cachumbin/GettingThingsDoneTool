@@ -31,7 +31,7 @@
                 </label>
                 <label for="tipoTarea"> Introduce la categoria de la tarea
                     <select name="tipoTarea" id="tipoTarea" class="label">
-                        <option value="Sin Categoria">Sin Categoria</option>
+                        <option value="Sin Categoria" id="SinCategoria">Sin Categoria</option>
                     </select>
                 </label>
                 <label for="accionableTarea"> Es accionable
@@ -43,20 +43,14 @@
         <section class="container" id="container">
             <fieldset id="filtro" class="filtro">
                 <legend>Filtrar por Categoria</legend>
-                <div>
-                    <input type="radio" id="todas" name="categoriaOpcion" value="Todas" checked>
-                    <label for="todas" class="filtroLabel">Todas</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="sinCategoria" name="categoriaOpcion" value="Sin Categoria">
-                    <label for="sinCategoria" class="filtroLabel">Sin Categoria</label>
-                </div>
+                <input type="button" id="Todas" class="botonFiltro" value="Todas">
+                <input type="button" id="SinCategoria" class="botonFiltro" value="Sin Categoria">
             </fieldset>
             <input type="button" id="filtrar" class="filtrar" value="Filtrar">
         </section>
         <section id="tasks"><p id="noTarea">No hay tareas aun</p></section>
     </main>
+    <script src="./Classes/categories.js"></script>
     <script src="./Classes/task.js"></script>
     <script src="main.js"></script>
 </body>
