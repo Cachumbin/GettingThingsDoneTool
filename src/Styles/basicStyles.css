@@ -154,7 +154,7 @@ select {
     border: 5px solid #fff;
     border-radius: 1rem;
     appearance: none;
-    padding: 0.2rem;
+    padding: 0.4rem;
 }
 
 /*------------Boton-switch--------------*/
@@ -253,16 +253,16 @@ legend {
     margin: 0.5rem;
 }
 
-input[type=radio] {
-    display: none;
-}
-
-input[type="radio"]:checked+label { 
-    background-color: rgb(255, 255, 255, 0.2); 
-}
-
 #tasks {
     font-size: 2rem;
     margin: 2rem;
     padding: 2rem;
+}
+
+.botonFiltro {
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin: 0.3rem;
+    width: 10%;
+    flex-wrap: wrap;
 }

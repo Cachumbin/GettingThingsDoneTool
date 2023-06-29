@@ -6,7 +6,6 @@ const accionableTarea = document.getElementById("accionableTarea");
 const mandar2 = document.getElementById("submit2");
 const categoria = document.getElementById("categoria");
 const filtro = document.getElementById("filtro");
-const filtrar = document.getElementById("filtrar");
 const tasksContainer = document.getElementById("tasks");
 const noTarea = document.getElementById("noTarea");
 
@@ -17,6 +16,9 @@ let categoriasFiltro = [];
 categoriasFiltro[0] = new Categoria("Todas")
 categoriasFiltro[1] = new Categoria("Sin Categoria")
 let divs = [];
+let categoriaDivs = [];
+
+
 
 function createTask(tarea) {
 
@@ -57,7 +59,15 @@ function display(target) {
         console.log("escondido")
       }
     }
-  }
+}
+
+function createCategory(nombre) {
+    tipoTarea.insertAdjacentHTML("beforeend",`<option value="${nombre}" id="${nombre}Opcion"> ${nombre} </option>`);
+    filtro.insertAdjacentHTML("beforeend",`
+        <input type="button" id="${nombre}" class="botonFiltro" value="${nombre}">
+    `);
+    categoriaDivs.push(document.getElementById(`${nombre}`))
+}
   
 mandar2.addEventListener("click", ()=>{
     if (categoria.value == "") {
@@ -67,12 +77,9 @@ mandar2.addEventListener("click", ()=>{
     } else {
         categoriasFiltro.push(new Categoria(categoria.value))
         console.log(categoria.value);
-        tipoTarea.insertAdjacentHTML("beforeend",`<option value="${categoria.value}" id="${categoria.value}"> ${categoria.value} </option>`);
-        filtro.insertAdjacentHTML("beforeend",`
-            <input type="button" id="${categoria.value}" class="botonFiltro" value="${categoria.value}">
-        `);
-
-
+        
+        createCategory(categoria.value)
+        
 
         categoria.value = ""
         console.log(categoriasFiltro)
@@ -121,6 +128,13 @@ mandar.addEventListener("click", ()=>{
     if (event.target.classList.contains(`botonFiltro`)) {
         console.log(event.target.value)
         display(event.target.value)
+        for (let i = 0; i < categoriasFiltro.length; i++) {
+            if (categoriasFiltro[i].nombre === event.target.value) {
+                categoriaDivs[i].classList.add('activo')
+            } else {
+                categoriaDivs[i].classList.remove('activo')
+            }
+        }
     }
     event.stopPropagation()
   })
@@ -171,19 +185,18 @@ window.addEventListener("load", ()=>{
     }
 
     if (categoriasFiltro.length > 2) {
+        categoriaDivs.push(document.getElementById("Todas"))
+        categoriaDivs.push(document.getElementById("Sin_Categoria"))
         for (let i = 0; i < categoriasFiltro.length; i++) {
             if (i+2 != undefined) {
-                tipoTarea.insertAdjacentHTML("beforeend",`<option value="${categoriasFiltro[i+2].nombre}" id="${categoriasFiltro[i+2].nombre}"> ${categoriasFiltro[i+2].nombre} </option>`);
-                filtro.insertAdjacentHTML("beforeend",`
-                <input type="button" id="${categoriasFiltro[i+2].nombre}" class="botonFiltro" value="${categoriasFiltro[i+2].nombre}">
-                `);
+                createCategory(categoriasFiltro[i+2].nombre);
             } else {
                 console.log("terminado")
             }
         }
     }
-
 })
+
 
 
 console.log(tareas)

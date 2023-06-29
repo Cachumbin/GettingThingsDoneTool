@@ -11,3 +11,7 @@ input[type=text]:active {
 select:active {
     background-color: rgb(255,255,255, 0.6);
 }
+
+.activo {
+    background-color: rgb(255,255,255, 0.6); 
+}
