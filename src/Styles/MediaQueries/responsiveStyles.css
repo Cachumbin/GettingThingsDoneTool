@@ -1,3 +1,5 @@
+/*                                        360px                                        */
+
 @media (max-width: 360px) {
     .item {
         list-style: none;
@@ -43,4 +45,17 @@
     .tareaDiv {
         width: 80%;
     }
+
+    .howToSection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .howToImg {
+        margin: 0;
+        margin-top: 2rem;
+    }
 }
+
+/*                                                                                 */
+
