@@ -1,0 +1,46 @@
+@media (max-width: 360px) {
+    .item {
+        list-style: none;
+        padding: 1rem;
+        margin: 1rem 0.5rem;
+        
+    }
+    
+    .crearTarea {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .menu {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input[type=text], select, .checkboxDiv {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #filtro {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botonFiltro {
+        width: 100%;
+    }
+
+    #tasks {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tareaDiv {
+        width: 80%;
+    }
+}
