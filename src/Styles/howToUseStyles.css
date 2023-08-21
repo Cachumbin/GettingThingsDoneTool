@@ -1,5 +1,6 @@
 .howToSection {
     display: flex;
+    flex-direction: row;
 }
 
 .howToDiv {
@@ -18,4 +19,8 @@
     border-radius: 1.5rem;
     margin-left: 1.5rem;
     border: 10px solid rgb(0, 0, 0, 0.5) ;
+}
+
+.fixImg {
+    width: 98%;
 }

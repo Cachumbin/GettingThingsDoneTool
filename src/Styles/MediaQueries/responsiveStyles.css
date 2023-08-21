@@ -57,5 +57,221 @@
     }
 }
 
-/*                                                                                 */
+/*                                    480px                                             */
 
+@media (max-width: 480px) {
+    .item {
+        list-style: none;
+        padding: 1rem;
+        margin: 1rem 0.5rem;
+        
+    }
+    
+    .crearTarea {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input[type=text], select, .checkboxDiv {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #filtro {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botonFiltro {
+        width: 100%;
+    }
+
+    #tasks {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tareaDiv {
+        width: 80%;
+    }
+
+    .howToSection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .howToImg {
+        margin: 0;
+        margin-top: 2rem;
+    }
+}  
+
+/*                                    660px                                             */
+
+
+@media (max-width: 660px) {
+    .item {
+        list-style: none;
+        padding: 1rem;
+        margin: 1rem 0.5rem;
+        
+    }
+    
+    .crearTarea {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input[type=text], select, .checkboxDiv {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #filtro {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botonFiltro {
+        width: 100%;
+    }
+
+    #tasks {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tareaDiv {
+        width: 80%;
+    }
+
+    .howToSection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .howToImg {
+        margin: 0;
+        margin-top: 2rem;
+    }
+} 
+
+/*                                    960px                                             */
+
+@media (max-width: 960px) {
+    .item {
+        list-style: none;
+        padding: 1rem;
+        margin: 1rem 0.5rem;
+        
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    label {
+        display: flex;
+        flex-direction: row;
+    }
+
+    input[type=text], select, .checkboxDiv {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #filtro {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botonFiltro {
+        width: 100%;
+    }
+
+    #tasks {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tareaDiv {
+        width: 80%;
+    }
+
+    .howToSection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .howToImg {
+        margin: 0;
+        margin-top: 2rem;
+    }
+
+
+    
+} 
+
+/*                                    1280px                                             */
+
+@media (max-width: 1280px) {
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    #filtro {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botonFiltro {
+        width: 100%;
+    }
+
+    #tasks {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tareaDiv {
+        width: 80%;
+    }
+
+    /*.howToSection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .howToImg {
+        margin: 0;
+        margin-top: 2rem;
+    }*/
+
+    .fixImg {
+        width: 70%;
+    }
+} 
