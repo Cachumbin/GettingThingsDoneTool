@@ -9,7 +9,7 @@ const filtro = document.getElementById("filtro");
 const tasksContainer = document.getElementById("tasks");
 const noTarea = document.getElementById("noTarea");
 
-
+let nuevoNombre;
 let tareas = [];
 let accion;
 let categoriasFiltro = [];
@@ -43,6 +43,7 @@ function createTask(tarea) {
         <p>Categoria: ${tarea.area}</p>
         <p>Es accionable: ${accion}</p>
         <input type="button" class="boton" value="Completada" id="${tarea.nombre}">
+        <input type="button" class="botonEditar" value="Editar" id="${tarea.nombre}">
     `
     newDiv.classList.add(`tareaDiv`)
     newDiv.id = `${tarea.nombre}`
@@ -124,7 +125,9 @@ mandar.addEventListener("click", ()=>{
     localStorage.setItem("tareas", JSON.stringify(tareas))
 })
 
-  filtro.addEventListener("click", function(event) {
+
+
+filtro.addEventListener("click", function(event) {
     if (event.target.classList.contains(`botonFiltro`)) {
         console.log(event.target.value)
         display(event.target.value)
@@ -156,9 +159,37 @@ function deleteTask(tarea) {
     }
 }
 
+
 tasksContainer.addEventListener("click", function(event){
     if (event.target.classList.contains(`boton`)) {
         deleteTask(event.target.id)
+    }
+    event.stopPropagation()
+})
+
+tasksContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains(`botonEditar`)) {
+        nuevoNombre = prompt("Introduce el nuevo nombre de la tarea")
+        console.log(nuevoNombre)
+        var tareaIndex2 = tareas.findIndex(t => t.nombre === event.target.id);
+        if (tareaIndex2 !== -1) {
+            var divIndex2 = divs.findIndex(d => d.nombre === event.target.id);
+            if (divIndex2 !== -1) {
+                console.log(tareas[tareaIndex2], divs[divIndex2])
+                console.log(tareas[tareaIndex2].nombre, divs[divIndex2].nombre)
+                tareas[tareaIndex2].nombre = nuevoNombre;
+                divs[divIndex2].nombre = nuevoNombre;
+                console.log(tareas[tareaIndex2].nombre, divs[divIndex2].nombre)
+                divs[divIndex2].elemento.innerHTML = `
+                <p>${tareas[tareaIndex2].nombre}</p>
+                <p>Categoria: ${tareas[tareaIndex2].area}</p>
+                <p>Es accionable: ${accion}</p>
+                <input type="button" class="boton" value="Completada" id="${tareas[tareaIndex2].nombre}">
+                <input type="button" class="botonEditar" value="Editar" id="${tareas[tareaIndex2].nombre}">
+            `
+            }
+        }
+        console.log(event.target.id)
     }
     event.stopPropagation()
 })
