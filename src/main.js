@@ -13,12 +13,12 @@ let nuevoNombre;
 let tareas = [];
 let accion;
 let categoriasFiltro = [];
-categoriasFiltro[0] = new Categoria("Todas")
-categoriasFiltro[1] = new Categoria("Sin Categoria")
 let divs = [];
 let categoriaDivs = [];
+let apto;
 
-
+categoriasFiltro[0] = new Categoria("Todas")
+categoriasFiltro[1] = new Categoria("Sin Categoria")
 
 function createTask(tarea) {
 
@@ -69,36 +69,30 @@ function createCategory(nombre) {
     `);
     categoriaDivs.push(document.getElementById(`${nombre}`))
 }
-  
-mandar2.addEventListener("click", ()=>{
-    if (categoria.value == "") {
-
-        alert("Llene todos los campos antes de enviar")
-        
-    } else {
-        categoriasFiltro.push(new Categoria(categoria.value))
-        console.log(categoria.value);
-        
-        createCategory(categoria.value)
-        
-
-        categoria.value = ""
-        console.log(categoriasFiltro)
-
-        localStorage.setItem("categorias", JSON.stringify(categoriasFiltro));
-
-        
-
-    }
-})
 
 function buscar(category) {
     let result = categoriasFiltro.find(element => element.nombre === category)
     return result
 } 
 
+function deleteTask(tarea) {
+    var tareaIndex = tareas.findIndex(t => t.nombre === tarea);
+    if (tareaIndex !== -1) {
+        tareas.splice(tareaIndex, 1);
+        var divIndex = divs.findIndex(d => d.nombre === tarea);
+        if (divIndex !== -1) {
+            divs[divIndex].elemento.remove();
+            divs.splice(divIndex, 1);
+            localStorage.removeItem("tareas")
+            localStorage.setItem("tareas", JSON.stringify(tareas))
+            if (tareas == null) {
+                tareas = []
+            }
+        }
+    }
+}
+
 mandar.addEventListener("click", ()=>{
-    
 
     if (nombreTarea.value && tipoTarea.value != "") {
         
@@ -124,8 +118,35 @@ mandar.addEventListener("click", ()=>{
     }
     localStorage.setItem("tareas", JSON.stringify(tareas))
 })
+  
+mandar2.addEventListener("click", ()=>{
+    if (categoria.value == "") {
 
+        alert("Llene todos los campos antes de enviar")
+        
+    } else {
+        
+        localStorage.setItem("categorias", JSON.stringify(categoriasFiltro));
+        for (i=0; i<categoriasFiltro.length; i++) {
+            if (categoria.value == categoriasFiltro[i].nombre) {
+                alert("Esa categoria ya existe")
+                apto = false
+            } else {
+                apto = true
+            }
+        }
+        if (apto) {
+            categoriasFiltro.push(new Categoria(categoria.value))
+                console.log(categoria.value);
+        
+                createCategory(categoria.value)
+        
 
+                categoria.value = ""
+                console.log(categoriasFiltro)
+        }
+    }
+})
 
 filtro.addEventListener("click", function(event) {
     if (event.target.classList.contains(`botonFiltro`)) {
@@ -141,24 +162,6 @@ filtro.addEventListener("click", function(event) {
     }
     event.stopPropagation()
   })
-
-function deleteTask(tarea) {
-    var tareaIndex = tareas.findIndex(t => t.nombre === tarea);
-    if (tareaIndex !== -1) {
-        tareas.splice(tareaIndex, 1);
-        var divIndex = divs.findIndex(d => d.nombre === tarea);
-        if (divIndex !== -1) {
-            divs[divIndex].elemento.remove();
-            divs.splice(divIndex, 1);
-            localStorage.removeItem("tareas")
-            localStorage.setItem("tareas", JSON.stringify(tareas))
-            if (tareas == null) {
-                tareas = []
-            }
-        }
-    }
-}
-
 
 tasksContainer.addEventListener("click", function(event){
     if (event.target.classList.contains(`boton`)) {
@@ -228,7 +231,4 @@ window.addEventListener("load", ()=>{
     }
 })
 
-
-
 console.log(tareas)
-
