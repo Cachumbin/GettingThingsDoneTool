@@ -79,6 +79,19 @@ footer {
     border: 0;
 }
 
-.footerImgimg { 
+.footerImgimg {
     width: 4rem;
+}
+
+#logo {
+    width: 4rem;
+    fill: white;
+    stroke: white;
+    color: white;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+#linkedin {
+    width: 4rem;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
